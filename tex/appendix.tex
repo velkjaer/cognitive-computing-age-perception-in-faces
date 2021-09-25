@@ -1,0 +1,32 @@
+\appendix
+\seclab{A short note on Cross-validation}{appendix} Cross-validation (CV) is a beautiful technique which can alleviate the pain of tuning hyperparameters when finding the optimal model and estimate the generalization error. CV was used for every model created in the code phase of this project. Therefore the procedure is outlined in pseudo-code in Algorithm \ref{algo:tlcv}\footnote{The idea of outlining the Algorithm in pseudo-code is due to \cite{allhailkingMorten}}.
+\begin{algorithm}
+\caption{$K$-Fold Cross-Validation for Model selection and $\EM{gen}$ estimation}
+
+\begin{algorithmic}[0]
+
+\Require{$K_1$ folds in outer loop for estimation of the generalization error}
+\Require{$K_2$ folds in inner loop for model selection}
+\Require{$S$ models to cross-validate: $\mathcal{M}_1 , ... , \mathcal{M}_S$}
+\Ensure{$\hat{E}_{\mathcal{M}*}^{\mathrm{gen}}$}
+
+\For{$i =1,...,K_1$}
+    \State{\emph{Outer CV loop. The data set, $\calD$ is split into $K_1$ folds} }
+    \State{The $i$'th split of $\calD$ is $\calD_{i}^{\mathrm{par}},\calD_{i}^{\mathrm{test}}$}
+    \For{$j=1,...,K_2$}
+        \State{\emph{Inner CV loop doing $K_2$ splits for model selection testing $S$ models}}
+        \State{The $j$'th split of $\calD_i^{\mathrm{par}}$ is $\calDss{j}{train},\calDss{j}{val}$} 
+        \For{$s=1,...,S$}
+            \State{Train $\mathcal{M}_s$ on $\calDss{j}{train}$ }
+            \State{Let $\EMss{_{s,j}}{val}$ be the \emph{validation error} of the model $\mathcal{M}_s$ when it is \emph{tested} on $\calDss{j}{val}$}
+        \EndFor
+    \EndFor    
+    \State{For each $s$ compute $\hat{E}_s^{\mathrm{gen}}= \sum_{j=1}^{K_2} \frac{\abs{\calDss{j}{val}}}{\calDss{i}{par}} \EMss{_s,j}{val}$ }
+    \State{Select the optimal model $\mathcal{M}^*$ = $\mathcal{M}_{s^*}$ where $s^* = \argmin_s \hat{E}_s^{\mathrm{gen}}$}
+    \State{Train $\mathcal{M}^*$ on $\calDss{i}{par}$}
+    \State{Let $E_i^{\mathrm{test}}$ be the \emph{test error} of the model $\mathcal{M}^*$ when it is tested on $\calDss{i}{test}$}
+\EndFor
+\State{Compute the estimate of the generalization error: $\hat{E}^{\mathrm{gen}} = \sum_{i}^{K_1} \frac{\abs{\calDss{i}{test}}}{N} E_i^{\mathrm{test}}$}
+\end{algorithmic}
+\label{algo:tlcv}
+\end{algorithm}

@@ -1,0 +1,76 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{ucs}
+\usepackage[a4paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage{upgreek}
+\usepackage{physics}
+%\input{texdef.tex}
+\input{tex/packages.tex}
+%\usepackage[final]{pdfpages}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+
+
+
+
+%\numberwithin{equation}{section}
+
+\setlength{\parindent}{0pt} % Disse to linjer sikrer, at der bliver mellemrum i stedet for indrykning ved afsnit
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\title{\Huge{ \textbf{Cognitive Modelling - 02458 \\ Exam Project \\
+Age in Faces}}
+}
+%\author{By Victor Elkjær Birk (s144086) and William Frisch Møller (s144067)}
+\date{December 2017}
+
+\renewcommand{\baselinestretch}{1.15}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Exam project}
+\lhead{Cognitive Modelling - 02458}
+\cfoot{\thepage}
+\begin{document}
+
+% Front page
+\maketitle
+\pagenumbering{gobble}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.12]{fig/dtu_logo.png}
+\end{figure}
+%\vspace{2cm}
+%\def\tablespace{1cm}
+%\begin{tabular}{l p{2.8cm} p{3.5cm} p{3cm}}
+%\textbf{Name} & \textbf{Study number} \hspace{0.75cm} & \textbf{Responsible for} & \textbf{Signature}  \\ %\hline 
+%& & & \\[0.4cm]
+%Victor Elkjær Birk & (s144086) & p. 6-9 \& 12-18 & \hrulefill \\[\tablespace]
+%William Frisch Møller & (s144067) & p. 1-6 \& 9-12 & \hrulefill
+%\end{tabular} \\[0.5cm]
+
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+% Tex
+\input{tex/introduction.tex}
+\input{tex/methodsandtheory.tex}
+\input{tex/results.tex}
+\input{tex/discussion.tex}
+\input{tex/conclusion.tex}
+% Bibliography
+\newpage
+
+\bibliography{references.bib}
+\bibliographystyle{unsrt}
+\newpage
+\input{tex/appendix.tex}
+
+\end{document}
